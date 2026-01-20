@@ -270,6 +270,12 @@ class StaticConfig:
         return f"StaticConfig({self._data!r})"
 
 
+
+@dataclass
+class EvalConfig:
+    enable_vbench: bool = MISSING
+
+
 @dataclass
 class ServeConfig:
     serve: ServeAddrConfig = field(default_factory=ServeAddrConfig)
@@ -281,6 +287,7 @@ class ServeConfig:
     dp_config: DpConfig = field(default_factory=DpConfig)
     metrics: MetricsConfig = field(default_factory=MetricsConfig)
     debug: DebugConfig = field(default_factory=DebugConfig)
+    eval: EvalConfig = field(default_factory=EvalConfig)
     quant: Optional[str] = MISSING
     dtype: Optional[str] = MISSING  # Legacy parameter. To be removed in the future.
     float_16bit_variant: str = MISSING

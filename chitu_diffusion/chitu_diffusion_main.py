@@ -220,10 +220,30 @@ def chitu_start():
     DiffusionBackend.state = BackendState.Running
 
 def chitu_terminate():
-    if torch.distributed.get_rank() == 0:
+    """发送终止信号，不要在这里执行耗时操作"""
+    rank = torch.distributed.get_rank()
+    if rank == 0:
         DiffusionBackend.state = BackendState.Terminated
         terminated_task = DiffusionTask.create_terminate_signal("0x")
         DiffusionBackend.generator.step(terminated_task)
+
+def chitu_run_vbench():
+    """在所有 rank 都退出生成循环后调用此函数执行 VBench"""
+    rank = torch.distributed.get_rank()
+    args = get_global_args()
+    
+    if not args.eval.enable_vbench:
+        return
+    
+    # 确保所有 rank 都到达这里
+    torch.distributed.barrier()
+    
+    if rank == 0:
+        logger.info("All ranks ready, starting VBench evaluation...")
+    
+    from chitu_diffusion.eval.vbench.runner import run_vbench_evaluation
+    run_vbench_evaluation(args)
+
 
 def chitu_is_terminated():
     return DiffusionBackend.state == BackendState.Terminated

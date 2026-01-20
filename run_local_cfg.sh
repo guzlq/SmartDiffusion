@@ -123,7 +123,7 @@ parallel_params="infer.diffusion.cp_size=$cp_size infer.diffusion.up_limit=2"
 # FlexCache 参数（启用 TeaCache 加速）
 # 注意：teacache_thresh 是在代码中自动设置的，不需要通过配置参数传递
 flexcache_params="infer.diffusion.enable_flexcache=true"
-
+eval_params="eval.enable_vbench=true"
 # 构建并执行命令
 echo "=========================================="
 echo "执行命令:"
@@ -139,5 +139,6 @@ torchrun \
     $script \
     $basic_params \
     $parallel_params \
-    $flexcache_params
+    $flexcache_params \
+    $eval_params
 
