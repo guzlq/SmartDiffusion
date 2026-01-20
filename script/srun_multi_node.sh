@@ -34,6 +34,8 @@ if [ -z "${NUM_MEMS}" ]; then
 fi
 
 THIS_SCRIPT=$(realpath $0)
+# 获取项目根目录（script 目录的父目录）
+PROJECT_ROOT=$(cd "$(dirname "$THIS_SCRIPT")/.." && pwd)
 
 if [[ "$3" != "--node" ]]; then
     SRUN_AND_TORCHRUN_ARGS=("${@:3}")
@@ -54,11 +56,17 @@ if [[ "$3" != "--node" ]]; then
         TORCHRUN_ARGS=("${SRUN_AND_TORCHRUN_ARGS[@]:$DELIMITER_POS+1}")
     fi
 
-    PARAMS="--job-name $JOB_NAME --nodes $NODES --ntasks-per-node $NTASKS_PER_NODE --cpus-per-task $NUM_CPUS --mem $NUM_MEMS --gres=gpu:$NUM_GPUS ${SRUN_ARGS[@]}"
+    PARAMS="-p a01 --job-name $JOB_NAME --nodes $NODES --ntasks-per-node $NTASKS_PER_NODE --cpus-per-task $NUM_CPUS --mem $NUM_MEMS --gres=gpu:$NUM_GPUS ${SRUN_ARGS[@]}"
     exec srun $PARAMS $THIS_SCRIPT $1 $2 --node "${TORCHRUN_ARGS[@]}"
 fi
 
 TORCHRUN_ARGS=("${@:4}")
+
+# 激活 uv 虚拟环境
+source /WORK/PUBLIC/zhaijdcyy_work/SmartDiffusion_original/.venv/bin/activate
+
+# 设置 PYTHONPATH - 使用当前项目目录（SmartDiffusion-flexcache）
+export PYTHONPATH=$PROJECT_ROOT:$PYTHONPATH
 
 MASTER_ADDR=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n 1)
 MASTER_PORT=$((($SLURM_JOB_ID % 10000)+52000))

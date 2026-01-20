@@ -35,8 +35,8 @@ fi
 # Model configurations
 # 模型配置
 declare -A MODEL_CONFIGS=(
-    ["Wan2.1-T2V-1.3B"]="/home/zhongrx/cyy/Wan2.1/Wan2.1-T2V-1.3B"
-    ["Wan2.1-T2V-14B"]="/home/zhongrx/cyy/Wan2.1/Wan2.1-T2V-14B"
+    ["Wan2.1-T2V-1.3B"]="/home/fit/zhaijdcyy/WORK/models/Wan2.1-T2V-1.3B"
+    ["Wan2.1-T2V-14B"]="/home/fit/zhaijdcyy/WORK/models/Wan2.1-T2V-14B"
     ["Wan2.2-T2V-A14B"]="/home/zhongrx/cyy/model/Wan22-t2v-a14b"
     # Add more models here
     # 在此处添加更多模型
@@ -79,7 +79,7 @@ parallel_params="infer.diffusion.cp_size=$cp_size infer.diffusion.up_limit=2"
 
 # 魔法参数！
 magic_params="infer.diffusion.low_mem_level=1 \
-            infer.diffusion.enable_flexcache=true"
+infer.diffusion.enable_flexcache=true"
 
 # Build and execute command
 command="./script/srun_multi_node.sh 1 $num_gpus $script \
