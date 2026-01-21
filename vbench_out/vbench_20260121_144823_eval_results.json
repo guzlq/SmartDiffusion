@@ -1,0 +1,58 @@
+{
+    "subject_consistency": [
+        0.9382746230810881,
+        [
+            {
+                "video_path": "/home/zlq/SmartDiffusion/output/A_cat_walking_on_gra_e492d68e.mp4",
+                "video_results": 0.9382746230810881
+            }
+        ]
+    ],
+    "background_consistency": [
+        0.9716378789395094,
+        [
+            {
+                "video_path": "/home/zlq/SmartDiffusion/output/A_cat_walking_on_gra_e492d68e.mp4",
+                "video_results": 0.9716378789395094,
+                "video_sim": 77.73103031516075,
+                "cnt_per_video": 80
+            }
+        ]
+    ],
+    "motion_smoothness": [
+        0.9874999364997068,
+        [
+            {
+                "video_path": "/home/zlq/SmartDiffusion/output/A_cat_walking_on_gra_e492d68e.mp4",
+                "video_results": 0.9874999364997068
+            }
+        ]
+    ],
+    "dynamic_degree": [
+        0.0,
+        [
+            {
+                "video_path": "/home/zlq/SmartDiffusion/output/A_cat_walking_on_gra_e492d68e.mp4",
+                "video_results": false
+            }
+        ]
+    ],
+    "aesthetic_quality": [
+        0.5788135528564453,
+        [
+            {
+                "video_path": "/home/zlq/SmartDiffusion/output/A_cat_walking_on_gra_e492d68e.mp4",
+                "video_results": 0.5788135528564453
+            }
+        ]
+    ],
+    "imaging_quality": [
+        0.43894451282642505,
+        [
+            {
+                "video_path": "/home/zlq/SmartDiffusion/output/A_cat_walking_on_gra_e492d68e.mp4",
+                "video_results": 43.89445128264251
+            }
+        ]
+    ]
+}

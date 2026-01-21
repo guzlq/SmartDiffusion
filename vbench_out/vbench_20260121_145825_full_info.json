@@ -1,0 +1,16 @@
+[
+    {
+        "prompt_en": "A cat walking on grass.",
+        "dimension": [
+            "subject_consistency",
+            "background_consistency",
+            "motion_smoothness",
+            "dynamic_degree",
+            "aesthetic_quality",
+            "imaging_quality"
+        ],
+        "video_list": [
+            "/home/zlq/SmartDiffusion/output/A_cat_walking_on_gra_beac1493.mp4"
+        ]
+    }
+]
